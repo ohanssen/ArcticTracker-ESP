@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <link href="config_menu.css" rel="stylesheet" type="text/css" />
+     <link href="style.css" rel="stylesheet" type="text/css" />
+   </head>
+   <body>
+      <div id="config_menu">
+         <ul class="menu">
+            <li>
+               <a href="node_info.lua">Status info</a>
+            </li>
+            <li>
+               <a href="">APRS config</a>
+            </li>
+            <li>
+               <a href="">WIFI config</a>
+            </li>
+            <li>
+               <a href="">Igate config</a>
+           </li>
+           
+        </ul>
+        <br />
+        <button id="restart" onclick="location.href='restartServer?lang=no'">RESTART</button>
+     </div>
+     <div id="config_main">
+        <iframe id="config_main" name="config_main" src="node_info.lua"></iframe>
+     </div> 
+   </body>
+</html>
