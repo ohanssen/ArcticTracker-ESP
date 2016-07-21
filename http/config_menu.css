@@ -1,10 +1,11 @@
- 
+  
+body {background: #cfd5cc; } 
  
  div#config_menu {
    float: left;
    width: 9.3em;
    margin-right:1em;
-   padding-top:55px;
+   padding-top:55px;  
    background-position: 4px 10px
  } 
  
@@ -24,17 +25,11 @@
    border-bottom: 3px dotted #272
  }
  
+ ul.menu a {text-decoration: none}
  ul.menu ul {padding-left: 1em;}
  ul.menu ul li {font-size: smaller}
+ ul.menu li:hover {background: #fff}
  
- a:hover {background: #fff}
- 
- ul.menu li.selected {
-   background-image: url(pointer.gif);
-   background-position: 0px center;
-   background-repeat: no-repeat;
- }
- ul.menu li.selected a {color: #833}
  
  .status {
    margin-top: 1em; 
@@ -45,5 +40,5 @@
    font-size: 90%
  }
  
+ button {background: #cdc; font-size: smaller; margin-left: 5px;}
  
- img.state {vertical-align: bottom; margin-left: 0.5em}

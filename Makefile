@@ -5,7 +5,7 @@
 NODEMCU-UPLOADER=/usr/local/bin/nodemcu
 # Serial port
 PORT=/dev/ttyUSB0
-SPEED=38400
+SPEED=115200
 
 ######################################################################
 # End of user config
@@ -33,17 +33,17 @@ usage:
 
 # Upload one files only
 upload:
-	@python $(NODEMCU-UPLOADER) -b $(SPEED) -p $(PORT) upload $(FILE)
+	@python $(NODEMCU-UPLOADER) --start_baud $(SPEED) -p $(PORT) upload $(FILE)
 
 # Upload HTTP files only
 upload_http: $(HTTP_FILES)
-	@python $(NODEMCU-UPLOADER) -b $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
+	@python $(NODEMCU-UPLOADER) --start_baud $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
 
 # Upload httpserver lua files (init and server module)
 upload_server: $(LUA_FILES)
-	@python $(NODEMCU-UPLOADER) -b $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
+	@python $(NODEMCU-UPLOADER) --start_baud $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
 
 # Upload all
 upload_all: $(LUA_FILES) $(HTTP_FILES)
-	@python $(NODEMCU-UPLOADER) -b $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
+	@python $(NODEMCU-UPLOADER) --start_baud $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
 

@@ -23,6 +23,9 @@
    vertical-align: middle
  }
  
+ input {height: 1.6em; border: 1px inset #666;  margin-left: 5px; padding: 0px 3px 0px 3px;}
+ button {background: #cdc; font-size: smaller; margin-left: 5px;}
+ 
  label.leftlab, label.lleftlab {
    float: left;
    width: 14em;
