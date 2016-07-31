@@ -115,6 +115,7 @@ function scanAp()
          
       end )
    end
+   collectgarbage()
 end
 
 
@@ -153,7 +154,6 @@ end
 function mcu_setParam(p, val)
    return mcu_doCommand("W " .. p .. " " .. val)
 end
-
 
 
 -- --------------------------------------------------------------
