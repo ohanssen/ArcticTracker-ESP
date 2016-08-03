@@ -7,8 +7,18 @@ basicAuth = {}
 -- Parse basic auth http header.
 -- Returns the username if header contains valid credentials,
 -- nil otherwise.
-function basicAuth.authenticate(header)
+function basicAuth.authenticate(header, uname, passwd)
+  
+  
    local conf = dofile("httpserver-conf.lc")
+   
+   if (not not uname) then 
+     conf.auth.user = uname
+   end
+   if (not not passwd) then
+     conf.auth.password = passwd
+   end
+   
    local credentials_enc = header:match("Authorization: Basic ([A-Za-z0-9+/=]+)")
    if not credentials_enc then
       return nil

@@ -1,9 +1,10 @@
 -- httpserver
 -- Author: Marcos Kirsch
 
+   
 -- Starts web server in the specified port.
-return function (port)
-
+return function (port, uname, passwd)  
+   
    local s = net.createServer(net.TCP, 10) -- 10 seconds client timeout
    s:listen(
       port,
@@ -105,7 +106,7 @@ return function (port)
             print(req.method .. ": " .. req.request)
             if conf.auth.enabled then
                auth = dofile("httpserver-basicauth.lc")
-               user = auth.authenticate(payload) -- authenticate returns nil on failed auth
+               user = auth.authenticate(payload, uname, passwd) -- authenticate returns nil on failed auth
             end
 
             if user and req.methodIsValid and (req.method == "GET" or req.method == "POST" or req.method == "PUT") then

@@ -276,20 +276,24 @@ tmr.alarm(1, 3000, tmr.ALARM_SINGLE, function ()
   tmr.alarm(1, 30000, tmr.ALARM_AUTO, scanAp)
 end )
 
-
+-- Tell main MCU that we are booted and ready
+uart.write(0, "$__BOOT__\r\n")
 
 
 -- -------------------------------------------------------------------
--- Automatically start the web server on port 80
+-- Function to start the web server on port 80
+-- It is called only once so it will be deleted after use
 -- -------------------------------------------------------------------
 
-tmr.alarm(2, 10000, tmr.ALARM_AUTO, function()
-   if (not not wifi.sta.getip()) or (not not wifi.ap.getip()) then
-      dofile("httpserver.lc")(80)
-      tmr.unregister(2)
-   end 
-end )
-
+start_http_server = function(uname, passwd) 
+   tmr.alarm(2, 10000, tmr.ALARM_AUTO, function()
+      if (not not wifi.sta.getip()) or (not not wifi.ap.getip()) then
+         dofile("httpserver.lc")(80, uname, passwd)
+         tmr.unregister(2)
+         start_http_server = nil
+      end 
+   end )
+end
 
 collectgarbage()
 
