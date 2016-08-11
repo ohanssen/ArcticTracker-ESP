@@ -14,7 +14,7 @@ wifiConf.mode = wifi.STATIONAP  -- both station and access point
 
 wifiConf.accessPoint = {}
 wifiConf.accessPoint.ssid = "Arctic-"..node.chipid()   -- Name of the SSID you want to create
-wifiConf.accessPoint.pwd  = "Arctic-"..node.chipid()    -- WiFi password - at least 8 characters
+wifiConf.accessPoint.pwd  = "password"                 -- WiFi password - at least 8 characters
 
 wifiConf.accessPointIp = {}
 wifiConf.accessPointIp.ip      = "192.168.111.1"
@@ -265,11 +265,6 @@ end )
 wifi.setmode(wifiConf.mode)
 print('set (mode='..wifi.getmode()..')')
 
-if (wifiConf.mode == wifi.SOFTAP) or (wifiConf.mode == wifi.STATIONAP) then
-  print('AP MAC: ',wifi.ap.getmac())
-  wifi.ap.config(wifiConf.accessPoint)
-  wifi.ap.setip(wifiConf.accessPointIp)
-end
 
 tmr.alarm(1, 3000, tmr.ALARM_SINGLE, function () 
   scanAp()
@@ -278,6 +273,22 @@ end )
 
 -- Tell main MCU that we are booted and ready
 uart.write(0, "$__BOOT__\r\n")
+
+
+
+start_softap = function(ssid, passwd)
+  if (wifiConf.mode == wifi.SOFTAP) or (wifiConf.mode == wifi.STATIONAP) then
+     if not (ssid == "Arctic-NOCALL") then
+        wifiConf.accessPoint.ssid = ssid
+     end
+     wifiConf.accessPoint.pwd = passwd
+     
+     wifi.ap.config(wifiConf.accessPoint)
+     wifi.ap.setip(wifiConf.accessPointIp)
+  end
+  start_softap = nil
+end
+
 
 
 -- -------------------------------------------------------------------
