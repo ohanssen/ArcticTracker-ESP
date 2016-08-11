@@ -37,6 +37,8 @@ upload:
 
 # Upload HTTP files only
 upload_http: $(HTTP_FILES)
+	gzip -f -k http/config_menu.css
+	gzip -f -k http/style.css
 	@python $(NODEMCU-UPLOADER) --start_baud $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
 
 # Upload httpserver lua files (init and server module)

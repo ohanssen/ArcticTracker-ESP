@@ -35,14 +35,14 @@ end
 
 
 return function (con, req, args)
-  
+     
    dofile("httpserver-header.lc")(con, 200, 'html')
    con:send( [===[
      <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
      <title>Arctic Tracker</title>
-     <link rel="stylesheet" href="style.css" type="text/css"></head><body><h2>APRS settings</h2>
+     <link rel="stylesheet" href="style.css.gz" type="text/css"></head><body><h2>APRS settings</h2>
    ]===])
-   
+  
    if req.method == "GET" then
      con:send('<form action="submit1.lua" method="POST"><fieldset>')
      textField(con, "MYCALL",        10, "[a-zA-Z0-9\-]+",                       'My Callsign:');        br(con)

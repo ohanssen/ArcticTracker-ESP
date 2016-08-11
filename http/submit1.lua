@@ -27,7 +27,7 @@ return function (con, req, args)
    con:send( [===[
      <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
      <title>Arctic Tracker</title>
-     <link rel="stylesheet" href="style.css" type="text/css"></head><body><h2>APRS settings</h2>
+     <link rel="stylesheet" href="style.css.gz" type="text/css"></head><body><h2>APRS settings</h2>
      ]===])
      
      
@@ -53,6 +53,7 @@ return function (con, req, args)
     end
     
     con:send('</body></html>\n')
+    cbox = nil
     collectgarbage()
   end
   
