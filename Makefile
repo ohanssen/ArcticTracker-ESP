@@ -10,7 +10,15 @@ SPEED=115200
 ######################################################################
 # End of user config
 ######################################################################
-HTTP_FILES := $(wildcard http/*)
+HTTP_FILES := \
+   http/index.html.gz \
+   http/file_list.lua \
+   http/node_info.lua \
+   http/form1.lua \
+   http/submit1.lua \
+   http/style.css.gz \
+   http/config_menu.css.gz 
+   
 LUA_FILES := \
    init.lua \
    httpserver.lua \
@@ -35,10 +43,18 @@ usage:
 upload:
 	@python $(NODEMCU-UPLOADER) --start_baud $(SPEED) -p $(PORT) upload $(FILE)
 
+	
+http/index.html.gz: http/index.html
+	gzip -f -k http/index.html
+
+http/style.css.gz: http/style.css
+	gzip -f -k http/style.css
+	
+http/config_menu.css.gz: http/config_menu.css	
+	gzip -f -k http/config_menu.css
+	
 # Upload HTTP files only
 upload_http: $(HTTP_FILES)
-	gzip -f -k http/config_menu.css
-	gzip -f -k http/style.css
 	@python $(NODEMCU-UPLOADER) --start_baud $(SPEED) -p $(PORT) upload $(foreach f, $^, $(f))
 
 # Upload httpserver lua files (init and server module)
