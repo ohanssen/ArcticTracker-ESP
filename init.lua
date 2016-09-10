@@ -271,11 +271,7 @@ tmr.alarm(1, 3000, tmr.ALARM_SINGLE, function ()
   tmr.alarm(1, 30000, tmr.ALARM_AUTO, scanAp)
 end )
 
--- Tell main MCU that we are booted and ready
-uart.write(0, "$__BOOT__\r\n")
-
-
-
+print('create function start_softap')
 start_softap = function(ssid, passwd)
   if (wifiConf.mode == wifi.SOFTAP) or (wifiConf.mode == wifi.STATIONAP) then
      if not (ssid == "Arctic-NOCALL") then
@@ -307,6 +303,9 @@ start_http_server = function(uname, passwd)
 end
 
 collectgarbage()
+
+-- Tell main MCU that we are booted and ready
+uart.write(0, "$__BOOT__\r\n")
 
 
 
