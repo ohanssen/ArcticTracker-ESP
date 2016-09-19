@@ -23,6 +23,8 @@ HTTP_FILES := \
    
 LUA_FILES := \
    init.lua \
+   network.lua \
+   commands.lua \
    httpserver.lua \
    httpserver-b64decode.lua \
    httpserver-basicauth.lua \
