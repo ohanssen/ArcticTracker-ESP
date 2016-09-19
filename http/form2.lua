@@ -32,6 +32,12 @@ local function textField(con, id, size, attr, val)
   con:send('<input type="text" id="'..id..'" name="'..id..'" size="'..size..'" value="'..val..'" />\n')
 end
 
+local function textFieldR(con, id, size, pattern, attr)
+  val = mcu_getParam(id)
+  label(con, id, attr)
+  con:send('<input type="text" id="'..id..'" name="'..id..'" size="'..size..'" pattern="'..pattern..'" value="'..val..'" />\n')
+end
+
 local function br(con)
   con:send("<br/>\n")
 end
@@ -61,6 +67,9 @@ return function (con, req, args)
      br(con)
      sendAttr(con, "ap_ssid",   'Soft AP SSID:', wifiConf.accessPoint.ssid)
      textField(con, "SOFTAP_PASSWD", 15,  'Soft AP password:', wifiConf.accessPoint.pwd)
+     br(con); br(con)
+     textFieldR(con, "HTTP_USER", 15, "[a-zA-Z0-9\-]+",   'Webserver username:' ); br(con)
+     textFieldR(con, "HTTP_PASSWD", 15, ".*", 'Webserver password:')
      
      con:send('</fieldset> <button type="submit" name="update" id="update">Update\n')
      con:send('</button></form>\n')
@@ -69,6 +78,7 @@ return function (con, req, args)
      con:send("ERROR. req.method is ", req.method)
    end
    con:send('</body></html>\n')
+   collectgarbage()
 end
 
 

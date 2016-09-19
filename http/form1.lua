@@ -69,6 +69,7 @@ return function (con, req, args)
      con:send("ERROR. req.method is ", req.method)
    end
    con:send('</body></html>\n')
+   collectgarbage()
 end
 
 
