@@ -23,6 +23,7 @@ HTTP_FILES := \
    
 LUA_FILES := \
    init.lua \
+   scanap.lua \
    network.lua \
    commands.lua \
    httpserver.lua \
