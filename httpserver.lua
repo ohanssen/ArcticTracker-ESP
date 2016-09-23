@@ -31,7 +31,7 @@ return function (port, uname, passwd)
             local bufferedConnection = BufferedConnectionClass:new(connection)
             local status, err = coroutine.resume(connectionThread, fileServeFunction, bufferedConnection, req, args)
             if not status then
-               print("Error: ", err)
+               print("*** Error: ", err)
             end
          end
 
@@ -103,7 +103,7 @@ return function (port, uname, passwd)
 
             -- parse payload and decide what to serve.
             local req = dofile("httpserver-request.lc")(payload)
-            print(req.method .. ": " .. req.request)
+            -- print(req.method .. ": " .. req.request)
             if conf.auth.enabled then
                auth = dofile("httpserver-basicauth.lc")
                user = auth.authenticate(payload, uname, passwd) -- authenticate returns nil on failed auth
@@ -133,7 +133,7 @@ return function (port, uname, passwd)
                   -- Not finished sending file, resume.
                   local status, err = coroutine.resume(connectionThread)
                   if not status then
-                     print(err)
+                     print("*** "..err)
                   end
                elseif connectionThreadStatus == "dead" then
                   -- We're done sending file.
@@ -160,7 +160,7 @@ return function (port, uname, passwd)
    local ip = wifi.sta.getip()
    if not ip then ip = wifi.ap.getip() end
    if not ip then ip = "unknown IP" end
-   print("nodemcu-httpserver running at http://" .. ip .. ":" ..  port)
+   print("*** httpserver running at http://" .. ip .. ":" ..  port)
    return s
 
 end
