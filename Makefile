@@ -16,8 +16,10 @@ HTTP_FILES := \
    http/node_info.lua \
    http/form1.lua \
    http/form2.lua \
+   http/form3.lua \
    http/submit1.lua \
    http/submit2.lua \
+   http/submit3.lua \
    http/style.css.gz \
    http/config_menu.css.gz 
    

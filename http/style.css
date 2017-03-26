@@ -18,9 +18,11 @@
  
  div.trblock, label {display: block; overflow: hidden; }
  
+ 
  label, input, select, textarea { 
-   margin-bottom: 4px; 
-   vertical-align: middle
+   padding: 0px;   
+   padding-top: 1px;margin-bottom: 3px;
+   vertical-align: middle;
  }
  
  input {height: 1.6em; border: 1px inset #666;  margin-left: 5px; padding: 0px 3px 0px 3px;}
